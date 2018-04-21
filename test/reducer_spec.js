@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 import { expect } from 'chai';
-
-import {setupGame, setRecord} from '../app/action_createors';
+import {setupGame, setRecord, dealToPlayer, stand} from '../app/action_creators';
+import { newDeck } from '../app/lib/cards';
 import reducer from '../app/reducer';
 
 describe('reducer', () => {
@@ -59,6 +59,30 @@ describe('reducer', () => {
 
        it('keeps old variables', () => {
            expect(nextState.get('deck')).to.eq('fake deck');
+       });
+   });
+
+   describe("DEAL_TO_PLAYER", () => {
+       const action = dealToPlayer();
+       const initialState = new Map({"playerHand": new List(), "deck": newDeck()});
+       const nextState = reducer(initialState, action);
+
+       it('adds one card to player hand', () => {
+           expect(nextState.get('playerHand').size).to.eq(initialState.get('playerHand').size + 1);
+       });
+
+       it('removes one card from deck', () => {
+           expect(nextState.get('deck').size).to.eq(initialState.get('deck').size - 1);
+       });
+   });
+
+   describe("STAND", () => {
+       const action = stand();
+       const initialState = new Map({"hasStood": false});
+       const nextState = reducer(initialState, action);
+
+       it('sets hasStood to true', () => {
+           expect(nextState.get('hasStood')).to.eq(true);
        });
    });
 });

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app';
 import {createStore} from 'redux';
 import { Provider } from 'react-redux';
-
+import {AppContainer} from './components/app';
 import reducer from './reducer';
 import { setupGame, setRecord } from '../app/action_creators';
 
@@ -16,7 +16,7 @@ store.dispatch(setRecord(0, 0));
 
 ReactDOM.render(
    <Provider store={store}>
-       <App state={store.getState()} />
+       <AppContainer />
    </Provider>,
    document.getElementById('app')
 );

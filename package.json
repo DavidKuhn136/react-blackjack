@@ -8,7 +8,9 @@
     "webpack:watch": "npm run webpack -- --watch",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive",
     "test:watch": "npm run test -- --watch",
-    "webpack-dev-server": "node_modules/.bin/webpack-dev-server"
+    "webpack-dev-server": "node_modules/.bin/webpack-dev-server --mode=development",
+    "webpack-dev-server:open": "webpack-dev-server --mode=development --open chrome",
+    "webpack-dev-server:prod": "webpack-dev-server --mode=production --open chrome"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,8 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "seedrandom": "^2.4.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -47,6 +50,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-hot-loader": "^4.1.1",
     "sass-loader": "^7.0.1",
+    "sinon": "^4.5.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.14",
