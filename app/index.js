@@ -1,29 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import App from './components/app';
-import {fromJS} from 'immutable';
+import {createStore} from 'redux';
+import { Provider } from 'react-redux';
 
-import {newDeck, deal} from './lib/cards';
+import reducer from './reducer';
+import { setupGame, setRecord } from '../app/action_creators';
 
-let deck = newDeck();
-let playerHand, dealerHand;
+require('./css/main.scss');
 
-[deck, playerHand] = deal(deck, 2);
-[deck, dealerHand] = deal(deck, 2);
+let store = createStore(reducer, undefined, window.devToolsExtension ? window.devToolsExtension() : undefined);
 
-const state = fromJS({
-  deck,
-  playerHand,
-  dealerHand,
-  "winCount": 0,
-  "lossCount": 0,
-  hasStood: false
-});
-
-console.log(state);
+store.dispatch(setupGame());
+store.dispatch(setRecord(0, 0));
 
 ReactDOM.render(
-  <App state={state} />,
-  document.getElementById('app')
+   <Provider store={store}>
+       <App state={store.getState()} />
+   </Provider>,
+   document.getElementById('app')
 );

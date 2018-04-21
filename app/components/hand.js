@@ -1,9 +1,17 @@
 import React from 'react';
+import Card from './card';
 
 export default class Hand extends React.Component {
     render() {
         return (
-            <p>This is a hand component</p>
+            <div className="hand">
+              {this.props.cards.map((card, i) =>
+                <Card suit={card.get('suit')}
+                      rank={card.get('rank')}
+                      faceDown={!(card.has('suit') && card.has('rank'))}
+                      key={i} />
+                )}
+            </div>
         );
     }
 };
