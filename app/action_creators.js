@@ -17,8 +17,9 @@ export function dealToPlayer(seed=new Date().getTime()) {
   };
 }
 
-export function stand() {
+export function stand(seed=new Date().getTime()) {
   return {
-    "type": "STAND"
+    "type": "STAND",
+    seed
   };
 }
